@@ -10,7 +10,7 @@ urlpatterns = [
     #/index/
     url(r'^index', views.IndexView.as_view(), name='index'),
 
-    #/detail/
+    #/annonce pk/
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
 
     #/add/
@@ -27,7 +27,6 @@ urlpatterns = [
 
     # /list_annonces/
     url(r'^list_annonces', views.user_annonces_list, name='list_annonces'),
-
     
     # #/search_results/
     url(r'^search_results', views.search, name='search'),

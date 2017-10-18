@@ -17,7 +17,6 @@ class IndexView(generic.ListView):
     paginate_by = 3
 
     def get_queryset(self):
-
         return Annonce.objects.order_by('-date')
 
 
@@ -77,8 +76,6 @@ class UserFormView(View):
                     return redirect('jobs_search:index')
 
         return render (request, self.template_name, {'form':form})
-
-
 
 
 class UserLoginFormView(View):
