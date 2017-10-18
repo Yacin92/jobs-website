@@ -10,17 +10,17 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-class IndexView(generic.ListView):
+class AnnoncesListView(generic.ListView):
 
     template_name = "jobs_search/index.html"
     context_object_name = "all_annonces"
-    paginate_by = 3
+    paginate_by = 6
 
     def get_queryset(self):
         return Annonce.objects.order_by('-date')
 
 
-class DetailView (generic.DetailView):
+class AnnonceDetailView (generic.DetailView):
 
     model = Annonce
     context_object_name = 'annonce'

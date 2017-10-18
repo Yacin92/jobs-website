@@ -8,13 +8,13 @@ app_name = 'jobs_search'
 urlpatterns = [
 
     #/index/
-    url(r'^index', views.IndexView.as_view(), name='index'),
+    url(r'^$', views.AnnoncesListView.as_view(), name='index'),
 
     #/annonce pk/
-    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'^(?P<pk>[0-9]+)/$', views.AnnonceDetailView.as_view(), name='detail'),
 
     #/add/
-    url(r'^add',login_required(views.CreateAnnonce.as_view()), name='create'),
+    url(r'^add',views.CreateAnnonce.as_view(), name='create'),
 
     # /register/
     url(r'^register', views.UserFormView.as_view(), name='register'),

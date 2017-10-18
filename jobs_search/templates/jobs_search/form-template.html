@@ -1,16 +1,21 @@
 
-<div class="ui segment">
+<div class="ui grid" style="margin-left:30px; margin-right:30px">
     {% for field in form%}
-        <div >
-            <div>
-                <span>{{field.errors}}</span>
+
+            <div class="three wide column">
+                
             </div>
-            <label>
-                {{ field.label_tag}}
-            </label>
-            <div class="ui input">
+            <div class="three wide column">
+                <label>
+                <strong>{{ field.label_tag}}</strong>
+                </label>
+            </div>
+           
+            <div class="seven wide column">
                 {{field}}
             </div>
-        </div>
+            <div class="three wide column">
+                
+            </div>
     {% endfor%}
 </div>

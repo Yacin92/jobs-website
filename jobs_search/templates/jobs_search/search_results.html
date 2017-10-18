@@ -5,12 +5,12 @@
     <div class="four wide column">
         <br>
         <div class="ui container">
-            <div class="ui segment">
+            <div class="ui segment" style="position: fixed;width: 300px; margin-left: 10px;" >
 
-                <form action="{%url 'jobs_search:search'%}" method="POST">
+                <form action="{%url 'jobs_search:search'%}" method="POST" class="ui form">
                     {% csrf_token%}
                     <h3>region</h3>
-                    <select name="region">
+                    <select name="region" class="ui fluid dropdown">
                          <option value="sfax">sfax</option>
                          <option value="monastir">monastir</option>
                     </select>
@@ -18,15 +18,18 @@
                 <br>
 
                     <h3>domaine</h3>
-                    <select name="domaine">
+                    <select name="domaine" class="ui dropdown" id="select">
                          <option value="technology">technology</option>
                          <option value="mecanique">mecanique</option>
 
                     </select>
 
-                <br>
+                <br><br>
 
-                <input type="submit" name="" value="search">
+                <button class="positive ui compact labeled icon button" type="submit">
+                <i class="search icon"></i>
+                SEARCH
+                </button>
                 </form>
 
             </div>

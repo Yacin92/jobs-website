@@ -1,15 +1,15 @@
 {% extends 'jobs_search/base.html'%}
 {% block body%}
-    <h1>Add New Offer</h1>
-    <div>
-        <form action="" method="post" enctype="multipart/form-data">
+    <h1 style="text-align: center;">Add New Offer</h1>
+    <br>
+    <br>
+    <div  style="margin-left:30px; margin-right:30px">
+        <form action="" method="post" enctype="multipart/form-data" class="ui form">
             {% csrf_token%}
             {% include 'jobs_search/form-template.html'%}
-            <div>
-                <div>
-                    <button type="submit">submit</button>
-                </div>
-            </div>
+            <br>
+            <br>
+            <button class="positive ui big button" type="submit" style="margin-left: 50%">ADD</button>
         </form>
     </div>
 {% endblock%}

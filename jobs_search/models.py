@@ -12,7 +12,7 @@ class Annonce(models.Model):
     title = models.CharField(max_length=100)
     domaine = models.CharField(max_length=100, choices = domaines_list, default=1)
     region = models.CharField(max_length=100, choices = region_list, default=1)
-    description = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1500)
     image = models.FileField()
     date = models.DateField(auto_now=True)
     phone = models.CharField(max_length=100)
