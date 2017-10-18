@@ -1,0 +1,15 @@
+{% extends 'jobs_search/base.html'%}
+{% block body%}
+    <h1>Login</h1>
+    <div>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token%}
+            {% include 'jobs_search/form-template.html'%}
+            <div>
+                <div>
+                    <button type="submit">submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock%}

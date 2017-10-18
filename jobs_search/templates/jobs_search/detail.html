@@ -1,0 +1,36 @@
+{% extends 'jobs_search/base.html'%}
+{%block body%}
+<br>
+
+<div class="ui container">
+
+    <div class="ui segment">
+        <div class="ui items">
+          <div class="item">
+            <div class="image">
+              <img src="{{annonce.image.url}}">
+            </div>
+            <div class="content">
+              <a class="header" style='color:#21BA45'>{{annonce.title}}</a>
+              <br>
+              <h5>{{annonce.owner}}</h5>
+              <h5>{{annonce.domaine}}</h5>
+              <div class="extra">
+                <p>{{annonce.description}}</p>
+              </div>
+              <div class="extra">
+                {{annonce.date}}
+              </div>
+              <div class="extra">
+                {{annonce.region}}
+              </div>
+              <div class="extra">
+                {{annonce.phone}}
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+</div>
+{%endblock%}

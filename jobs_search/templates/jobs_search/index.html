@@ -1,0 +1,90 @@
+{% extends 'jobs_search/base.html'%}
+{%block body%}
+
+<div class="ui grid ">
+    <div class="four wide column">
+        <br>
+
+        <div class="ui container">
+            <div class="ui segment">
+
+                <form action="{%url 'jobs_search:search'%}" method="POST">
+                    {% csrf_token%}
+                    <h3>region</h3>
+                    <select name="region">
+                         <option value="sfax">sfax</option>
+                         <option value="monastir">monastir</option>
+                    </select>
+
+                <br>
+
+                    <h3>domaine</h3>
+                    <select name="domaine">
+                         <option value="technology">technology</option>
+                         <option value="mecanique">mecanique</option>
+
+                    </select>
+
+                <br>
+
+                <input type="submit" name="" value="search">
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="twelve wide column">
+        {%for annonce in all_annonces%}
+        <br>
+        <div class="ui container">
+
+            <div class="ui segment">
+                <div class="ui items">
+                  <div class="item">
+                    <div class="image">
+                      <img src="{{annonce.image.url}}">
+                    </div>
+                    <div class="content">
+                      <a class="header" style='color:#21BA45' href="{% url 'jobs_search:detail' annonce.id%}">{{annonce.title}}</a>
+                      <br>
+                      <h5>{{annonce.owner}}</h5>
+                      <div class="extra">
+                        {{annonce.date}}
+                      </div>
+                      <div class="extra">
+                        {{annonce.region}}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+
+        </div>
+        {%endfor%}
+        <br>
+        {% if is_paginated %}
+        <div class="ui pagination menu">
+        {% for i in paginator.page_range %}
+          {% if page_obj.number == i %}
+            <a class="active item"><span>{{ i }} </span></a>
+          {% else %}
+            <a href="?page={{ i }}" class="item">{{ i }}</a>
+          {% endif %}
+        {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{%endblock%}
