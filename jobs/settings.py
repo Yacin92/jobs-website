@@ -22,11 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+# SECRET_KEY = config('SECRET_KEY')
+# DEBUG = config('DEBUG', default=False, cast=bool)
 
 
-ALLOWED_HOSTS = ['jobs-tn.herokuapp.com']
+ALLOWED_HOSTS = ['jobs-tn.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -118,5 +118,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/' 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+SECRET_KEY='gzq&$aiw7)=a(&8ss8mvmwes4u23bqkeda-r#e#^fl0b_v*#zw'
+DEBUG=True
 
