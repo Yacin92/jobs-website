@@ -4,46 +4,45 @@
 <div class="ui grid ">
     <div class="four wide column">
         <br>
-
         <div class="ui container" >
             <div class="ui segment" style="position: fixed;width: 300px; margin-left: 10px;" >
-
                 <form action="{%url 'jobs_search:search'%}" method="POST" class="ui form">
-                    {% csrf_token%}
+                    {%csrf_token%}
                     <h3>region</h3>
                     <select name="region" class="ui fluid dropdown">
                          <option value="sfax">sfax</option>
                          <option value="monastir">monastir</option>
+                         <option value="gafsa">gafsa</option>
+                         <option value="tunis">tunis</option>
+                         <option value="sousse">sousse</option>
+                         <option value="gabes">gabes</option>
+                         <option value="mahdia">mahdia</option>
+                         <option value="beja">beja</option>
+                         <option value="tataouine">tataouine</option>
                     </select>
-
                 <br>
-
                     <h3>domaine</h3>
                     <select name="domaine" class="ui dropdown" id="select">
                          <option value="technology">technology</option>
-                         <option value="mecanique">mecanique</option>
-
+                         <option value="mechanics">mechanics</option>
+                         <option value="commerce">commerce</option>
+                         <option value="training and education">training and education</option>
+                         <option value="services">services</option>
+                         <option value="tourism">tourism</option>
                     </select>
-
                 <br><br>
-
                 <button class="positive ui compact labeled icon button" type="submit">
                 <i class="search icon"></i>
                 SEARCH
                 </button>
                 </form>
-
             </div>
-
         </div>
-
-
     </div>
     <div class="twelve wide column">
         {%for annonce in all_annonces%}
         <br>
         <div class="ui container">
-
             <div class="ui segment">
                 <div class="ui items">
                   <div class="item">
@@ -62,10 +61,8 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
             </div>
-
         </div>
         {%endfor%}
         <br>

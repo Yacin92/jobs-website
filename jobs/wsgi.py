@@ -16,3 +16,4 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "jobs.settings")
 
 application = Cling(get_wsgi_application())
 # application = get_wsgi_application()
+

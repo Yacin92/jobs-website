@@ -7,7 +7,7 @@ app_name = 'jobs_search'
 
 urlpatterns = [
 
-    #/index/
+    #/
     url(r'^$', views.AnnoncesListView.as_view(), name='index'),
 
     #/annonce pk/
@@ -27,7 +27,7 @@ urlpatterns = [
 
     # /list_annonces/
     url(r'^list_annonces', views.user_annonces_list, name='list_annonces'),
-    
+
     # #/search_results/
     url(r'^search_results', views.search, name='search'),
 

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import CreateView
 from .models import Annonce
@@ -9,6 +8,7 @@ from .forms import UserForm, UserLoginForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
 
 class AnnoncesListView(generic.ListView):
 
@@ -129,8 +129,10 @@ def search(request):
     domaine = request.POST.get('domaine')
 
 
-    annonces = Annonce.objects.filter(region__contains=region)
+    # annonces_region = Annonce.objects.filter(region__contains=region)
+    # annonces_domaine = Annonce.objects.filter(domaine__contains=domaine)
+    # annonces = annonces_region | annonces_domaine
 
+    annonces = Annonce.objects.filter(region=region, domaine=domaine)
 
     return render(request, 'jobs_search/search_results.html', {'annonces': annonces})
-

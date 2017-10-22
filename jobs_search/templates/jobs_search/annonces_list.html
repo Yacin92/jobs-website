@@ -2,6 +2,7 @@
 {% extends 'jobs_search/base.html'%}
 {%block body%}
 <br>
+{%if list_annonces%}
 <h3 style="text-align: center;">My offers</h3>
 {%for annonce in list_annonces%}
 <br>
@@ -31,4 +32,7 @@
     </div>
 </div>
 {%endfor%}
+{%else%}
+<h3 style="text-align: center;">you don't have any offers</h3>
+{%endif%}
 {%endblock%}

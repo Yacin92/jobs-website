@@ -13,6 +13,13 @@
                     <select name="region" class="ui fluid dropdown">
                          <option value="sfax">sfax</option>
                          <option value="monastir">monastir</option>
+                         <option value="gafsa">gafsa</option>
+                         <option value="tunis">tunis</option>
+                         <option value="sousse">sousse</option>
+                         <option value="gabes">gabes</option>
+                         <option value="mahdia">mahdia</option>
+                         <option value="beja">beja</option>
+                         <option value="tataouine">tataouine</option>
                     </select>
 
                 <br>
@@ -20,7 +27,11 @@
                     <h3>domaine</h3>
                     <select name="domaine" class="ui dropdown" id="select">
                          <option value="technology">technology</option>
-                         <option value="mecanique">mecanique</option>
+                         <option value="mechanics">mechanics</option>
+                         <option value="commerce">commerce</option>
+                         <option value="training and education">training and education</option>
+                         <option value="services">services</option>
+                         <option value="tourism">tourism</option>
 
                     </select>
 
@@ -67,8 +78,15 @@
             </div>
         </div>
         {%endfor%}
-    </div>
+        {%else%}
+    <div class="twelve wide column"> <br><br><br><strong style=" margin-left: 40% ;font-size:50px;">
+    no results
+  </strong></div>
+    </div>    
     {%endif%}
+
+
+
 
 
 
