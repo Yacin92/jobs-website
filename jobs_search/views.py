@@ -10,6 +10,7 @@ from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
+
 class AnnoncesListView(generic.ListView):
 
     template_name = "jobs_search/index.html"
@@ -42,6 +43,7 @@ class CreateAnnonce(CreateView):
     # def dispatch(self, *args, **kwargs):
     #     return super(CreateAnnonce, self).dispatch(*args, **kwargs)
 
+
 class UserFormView(View):
 
     # user registration view
@@ -52,7 +54,7 @@ class UserFormView(View):
     def get(self, request):
 
         form = self.form_class(None)
-        return render (request, self.template_name, {'form':form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
 
@@ -66,16 +68,15 @@ class UserFormView(View):
             user.username = username
             user.save()
 
-
             # return user object if credentials are correct
 
-            user = authenticate (username = username, password = password)
+            user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
                     login(request, user)
                     return redirect('jobs_search:index')
 
-        return render (request, self.template_name, {'form':form})
+        return render(request, self.template_name, {'form': form})
 
 
 class UserLoginFormView(View):
@@ -88,7 +89,7 @@ class UserLoginFormView(View):
     def get(self, request):
 
         form = self.form_class(None)
-        return render (request, self.template_name, {'form':form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
 
@@ -104,7 +105,7 @@ class UserLoginFormView(View):
 
         else:
 
-            return render (request, self.template_name, {'form':form})
+            return render(request, self.template_name, {'form': form})
 
 
 def user_logout(request):
@@ -118,7 +119,7 @@ def user_annonces_list(request):
     user = request.user
     list_annonces = user.annonce_set.all()
     context = {
-    'list_annonces':list_annonces
+        'list_annonces': list_annonces
     }
     return render(request, 'jobs_search/annonces_list.html', context)
 
@@ -127,7 +128,6 @@ def search(request):
 
     region = request.POST.get('region')
     domaine = request.POST.get('domaine')
-
 
     # annonces_region = Annonce.objects.filter(region__contains=region)
     # annonces_domaine = Annonce.objects.filter(domaine__contains=domaine)

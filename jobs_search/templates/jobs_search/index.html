@@ -1,11 +1,10 @@
-{% extends 'jobs_search/base.html'%}
-{%block body%}
+{% extends 'jobs_search/base.html'%} {%block body%}
 
 <div class="ui grid ">
     <div class="four wide column">
         <br>
-        <div class="ui container" >
-            <div class="ui segment" style="position: fixed;width: 300px; margin-left: 10px;" >
+        <div class="ui container">
+            <div class="ui segment" style="position: fixed;width: 300px; margin-left: 10px;">
                 <form action="{%url 'jobs_search:search'%}" method="POST" class="ui form">
                     {%csrf_token%}
                     <h3>region</h3>
@@ -20,7 +19,7 @@
                          <option value="beja">beja</option>
                          <option value="tataouine">tataouine</option>
                     </select>
-                <br>
+                    <br>
                     <h3>domaine</h3>
                     <select name="domaine" class="ui dropdown" id="select">
                          <option value="technology">technology</option>
@@ -30,8 +29,8 @@
                          <option value="services">services</option>
                          <option value="tourism">tourism</option>
                     </select>
-                <br><br>
-                <button class="positive ui compact labeled icon button" type="submit">
+                    <br><br>
+                    <button class="positive ui compact labeled icon button" type="submit">
                 <i class="search icon"></i>
                 SEARCH
                 </button>
@@ -45,36 +44,31 @@
         <div class="ui container">
             <div class="ui segment">
                 <div class="ui items">
-                  <div class="item">
-                    <div class="image">
-                      <img src="{{annonce.image.url}}">
+                    <div class="item">
+                        <div class="image">
+                            <img src="{{annonce.image.url}}">
+                        </div>
+                        <div class="content">
+                            <a class="header" style='color:#21BA45' href="{% url 'jobs_search:detail' annonce.id%}">{{annonce.title}}</a>
+                            <br>
+                            <h5>{{annonce.owner}}</h5>
+                            <div class="extra">
+                                {{annonce.date}}
+                            </div>
+                            <div class="extra">
+                                {{annonce.region}}
+                            </div>
+                        </div>
                     </div>
-                    <div class="content">
-                      <a class="header" style='color:#21BA45' href="{% url 'jobs_search:detail' annonce.id%}">{{annonce.title}}</a>
-                      <br>
-                      <h5>{{annonce.owner}}</h5>
-                      <div class="extra">
-                        {{annonce.date}}
-                      </div>
-                      <div class="extra">
-                        {{annonce.region}}
-                      </div>
-                    </div>
-                  </div>
                 </div>
             </div>
         </div>
         {%endfor%}
-        <br>
-        {% if is_paginated %}
+        <br> {% if is_paginated %}
         <div class="ui pagination menu">
-        {% for i in paginator.page_range %}
-          {% if page_obj.number == i %}
-            <a class="active item"><span>{{ i }} </span></a>
-          {% else %}
-            <a href="?page={{ i }}" class="item">{{ i }}</a>
-          {% endif %}
-        {% endfor %}
+            {% for i in paginator.page_range %} {% if page_obj.number == i %}
+            <a class="active item"><span>{{ i }} </span></a> {% else %}
+            <a href="?page={{ i }}" class="item">{{ i }}</a> {% endif %} {% endfor %}
         </div>
         {% endif %}
     </div>
