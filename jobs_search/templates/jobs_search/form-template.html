@@ -1,7 +1,19 @@
-<div class="ui grid" style="margin-left:30px; margin-right:30px">
+<!-- <div class="ui grid" style="margin-left:30px; margin-right:30px"> -->
     {% for field in form%}
 
-    <div class="three wide column"></div>
+
+
+    <div class="field">
+        <label>{{ field.label_tag}}</label>
+        {{field}}
+      </div>
+      <br>
+
+
+
+
+
+    <!-- <div class="three wide column"></div>
     
     <div class="three wide column">
         <label>
@@ -13,6 +25,9 @@
         {{field}}
     </div>
 
-    <div class="three wide column"></div>
+    <div class="three wide column"></div> -->
+
+
+
     {% endfor%}
-</div>
+<!-- </div> -->

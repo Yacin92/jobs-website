@@ -3,13 +3,13 @@
     <h1 style="text-align: center;">Add New Offer</h1>
     <br>
     <br>
-    <div  style="margin-left:30px; margin-right:30px">
+    <div  class="ui raised very padded text container segment">
         <form action="" method="post" enctype="multipart/form-data" class="ui form">
             {% csrf_token%}
             {% include 'jobs_search/form-template.html'%}
             <br>
             <br>
-            <button class="positive ui big button" type="submit" style="margin-left: 50%">ADD</button>
+            <button class="positive ui big button" type="submit" style="margin-left: 40%">ADD</button>
         </form>
     </div>
 {% endblock%}
