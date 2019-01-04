@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 from decouple import config
 from dj_database_url import parse as dburl
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,4 +124,7 @@ MEDIA_URL = '/media/'
 
 SECRET_KEY='gzq&$aiw7)=a(&8ss8mvmwes4u23bqkeda-r#e#^fl0b_v*#zw'
 DEBUG=True
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
 
