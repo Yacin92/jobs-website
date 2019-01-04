@@ -2,7 +2,6 @@
 {% block body%}
     <h1 style="text-align: center;">Add New Offer</h1>
     <br>
-    <br>
     <div  class="ui raised very padded text container segment">
         <form action="" method="post" enctype="multipart/form-data" class="ui form">
             {% csrf_token%}
@@ -10,6 +9,9 @@
             <br>
             <br>
             <button class="positive ui big button" type="submit" style="margin-left: 40%">ADD</button>
+            
         </form>
+        {% endblock%}
     </div>
-{% endblock%}
+
+
