@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  django-jobs:
+    build: .
+    # command: bash -c "python manage.py makemigrations && python manage.py migrate"
+    container_name: jobs-info
+    volumes:
+      - .:/jobs-website
+    ports:
+      - "8000:8000"
+
