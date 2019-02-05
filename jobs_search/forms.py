@@ -8,6 +8,7 @@ class ProfileForm(forms.ModelForm):
     username = forms.CharField(max_length=100)
     email = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)
+    status = forms.ChoiceField(widget=forms.RadioSelect(attrs={}), choices=Profile.STATUS)
 
     class Meta:
         model = Profile
