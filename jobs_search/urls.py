@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^add',views.CreateAnnonce.as_view(), name='create'),
 
     # /register/
-    url(r'^register', views.UserFormView.as_view(), name='register'),
+    url(r'^register', views.ProfileFormView.as_view(), name='register'),
 
     # /login/
     url(r'^login', views.UserLoginFormView.as_view(), name='login'),

@@ -3,6 +3,18 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 
+class Profile(models.Model):
+    STATUS = (
+        ('employee', 'employee'),
+        ('employer', 'employer')
+    )
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=STATUS)
+
+    def __str__(self):
+        return "{} - {}".format(self.user.username, self.status)
+
+
 class Annonce(models.Model):
 
     domaines_list = (('technology', 'technology'), ('mechanics', 'mechanics'), ('commerce', 'commerce')
@@ -14,7 +26,7 @@ class Annonce(models.Model):
         , ('sousse', 'sousse'), ('gabes', 'gabes'), ('mahdia', 'mahdia'), ('beja', 'beja')
         , ('tataouine', 'tataouine'),)
 
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     domaine = models.CharField(max_length=100, choices = domaines_list, default=1)
     region = models.CharField(max_length=100, choices = region_list, default=1)
@@ -23,10 +35,9 @@ class Annonce(models.Model):
     date = models.DateField(auto_now=True)
     phone = models.PositiveIntegerField()
 
-
     def get_absolute_url(self):
         return reverse('jobs_search:index')
 
-
     def __str__(self):
         return self.title
+

@@ -4,12 +4,14 @@ from .models import Annonce
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
-from .forms import UserForm, UserLoginForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
-
+from .models import Profile
+from .forms import ProfileForm
+from .forms import UserLoginForm
+from django.contrib.auth.models import User
 
 class AnnoncesListView(generic.ListView):
 
@@ -36,7 +38,7 @@ class CreateAnnonce(CreateView):
     fields = ['title', 'domaine', 'region', 'description', 'image', 'phone']
 
     def form_valid(self, form):
-        form.instance.owner = self.request.user
+        form.instance.owner = Profile.objects.get(user=self.request.user)
         return super(CreateAnnonce, self).form_valid(form)
 
     # @method_decorator(login_required)
@@ -44,11 +46,11 @@ class CreateAnnonce(CreateView):
     #     return super(CreateAnnonce, self).dispatch(*args, **kwargs)
 
 
-class UserFormView(View):
+class ProfileFormView(View):
 
     # user registration view
 
-    form_class = UserForm
+    form_class = ProfileForm
     template_name = 'jobs_search/register.html'
 
     def get(self, request):
@@ -61,12 +63,17 @@ class UserFormView(View):
         form = self.form_class(request.POST)
 
         if form.is_valid():
-            user = form.save(commit=False)
-            username = form.cleaned_data['username']
+            # profile = form.save(commit=False)
+            email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user.set_password(password)
-            user.username = username
-            user.save()
+            username = form.cleaned_data['username']
+            status = form.cleaned_data['status']
+
+            u_s_r = User.objects.create(email=email, username=username)
+            u_s_r.set_password(password)
+            u_s_r.save()
+            profile = Profile.objects.create(user=u_s_r, status=status)
+            profile.save()
 
             # return user object if credentials are correct
 
@@ -117,7 +124,8 @@ def user_logout(request):
 def user_annonces_list(request):
 
     user = request.user
-    list_annonces = user.annonce_set.all()
+    profile = Profile.objects.get(user=user)
+    list_annonces = profile.annonce_set.all()
     context = {
         'list_annonces': list_annonces
     }
