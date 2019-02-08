@@ -41,3 +41,10 @@ class Annonce(models.Model):
     def __str__(self):
         return self.title
 
+class Request(models.Model):
+    annonce = models.ForeignKey(to=Annonce, on_delete=models.CASCADE)
+    employee = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
+    employee_cv_file=models.FileField()
+
+    def __str__(self):
+        return "{} - {}".format(self.annonce.title, self.employee)
