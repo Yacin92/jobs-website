@@ -8,10 +8,13 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
-from .models import Profile
+from .models import Profile, Request
 from .forms import ProfileForm
 from .forms import UserLoginForm
 from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 class AnnoncesListView(generic.ListView):
 
@@ -144,3 +147,18 @@ def search(request):
     annonces = Annonce.objects.filter(region=region, domaine=domaine)
 
     return render(request, 'jobs_search/search_results.html', {'annonces': annonces})
+
+def apply(request):
+    try:
+        if request.method == 'POST' and request.FILES['cv_pdf']:
+            cv_pdf = request.FILES['cv_pdf']
+            fs = FileSystemStorage()
+            filename = fs.save(cv_pdf.name, cv_pdf)
+            uploaded_file_url = fs.url(filename)
+            profile = Profile.objects.get(user=request.user)
+            annonce = Annonce.objects.get(pk=request.POST.get("annonce_hidden_pk"))
+            job_request = Request.objects.create(annonce=annonce, employee=profile, employee_cv_file=cv_pdf)
+            job_request.save()
+            return redirect('jobs_search:index')
+    except:
+        return render(request, 'jobs_search/error_upload.html')
