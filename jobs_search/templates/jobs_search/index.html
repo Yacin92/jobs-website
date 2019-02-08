@@ -1,12 +1,14 @@
 {% extends 'jobs_search/base.html'%} {%block body%}
 {% load static %}
 <script>
-function apply(title) {
-    $('.ui.modal')
-  .modal('show')
-  $("#title_header").text(title)
-;
-}
+    function apply(title, annonce_pk) {
+        $('.ui.modal')
+            .modal('show')
+        $("#title_header").text("you are applying to : " + title)
+        $("#annonce_hidden_pk").attr("value", annonce_pk)
+        
+        ;
+    }
 </script>
 <div class="ui grid ">
     <div class="four wide column">
@@ -17,31 +19,31 @@ function apply(title) {
                     {%csrf_token%}
                     <h3>region</h3>
                     <select name="region" class="ui fluid dropdown">
-                         <option value="sfax">sfax</option>
-                         <option value="monastir">monastir</option>
-                         <option value="gafsa">gafsa</option>
-                         <option value="tunis">tunis</option>
-                         <option value="sousse">sousse</option>
-                         <option value="gabes">gabes</option>
-                         <option value="mahdia">mahdia</option>
-                         <option value="beja">beja</option>
-                         <option value="tataouine">tataouine</option>
+                        <option value="sfax">sfax</option>
+                        <option value="monastir">monastir</option>
+                        <option value="gafsa">gafsa</option>
+                        <option value="tunis">tunis</option>
+                        <option value="sousse">sousse</option>
+                        <option value="gabes">gabes</option>
+                        <option value="mahdia">mahdia</option>
+                        <option value="beja">beja</option>
+                        <option value="tataouine">tataouine</option>
                     </select>
                     <br>
                     <h3>domaine</h3>
                     <select name="domaine" class="ui dropdown" id="select">
-                         <option value="technology">technology</option>
-                         <option value="mechanics">mechanics</option>
-                         <option value="commerce">commerce</option>
-                         <option value="training and education">training and education</option>
-                         <option value="services">services</option>
-                         <option value="tourism">tourism</option>
+                        <option value="technology">technology</option>
+                        <option value="mechanics">mechanics</option>
+                        <option value="commerce">commerce</option>
+                        <option value="training and education">training and education</option>
+                        <option value="services">services</option>
+                        <option value="tourism">tourism</option>
                     </select>
                     <br><br>
                     <button class="positive ui compact labeled icon button" type="submit">
-                <i class="search icon"></i>
-                SEARCH
-                </button>
+                        <i class="search icon"></i>
+                        SEARCH
+                    </button>
                 </form>
             </div>
         </div>
@@ -58,7 +60,8 @@ function apply(title) {
                             <!-- <img src="{% static annonce.image.name %}"> -->
                         </div>
                         <div class="content">
-                            <a class="header" style='color:#21BA45' href="{% url 'jobs_search:detail' annonce.id%}">{{annonce.title}}</a>
+                            <a class="header" style='color:#21BA45'
+                                href="{% url 'jobs_search:detail' annonce.id%}">{{annonce.title}}</a>
                             <br>
                             <h5>{{annonce.owner}}</h5>
                             <div class="extra">
@@ -68,7 +71,8 @@ function apply(title) {
                                 {{annonce.region}}
                             </div>
                             <div>
-                                <button class="ui green right floated button" onclick="apply('{{annonce.title}}')">Apply</button>
+                                <button class="ui green right floated button"
+                                    onclick="apply('{{annonce.title}}', '{{annonce.pk}}')">Apply</button>
                             </div>
                         </div>
                     </div>
@@ -84,31 +88,29 @@ function apply(title) {
         </div>
         {% endif %}
     </div>
-    <div class="ui modal">
-        <i class="close icon"></i>
-        <div class="header">
-          Profile Picture
-        </div>
-        <div class="image content">
-          <div class="ui medium image">
-            <img src="/images/avatar/large/chris.jpg">
-          </div>
-          <div class="description">
-            <div class="ui header" id="title_header">We've auto-chosen a profile image for you.</div>
-            <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-            <p>Is it okay to use this photo?</p>
-          </div>
-        </div>
-        <div class="actions">
-          <div class="ui black deny button">
-            Nope
-          </div>
-          <div class="ui positive right labeled icon button">
-            Yep, that's me
-            <i class="checkmark icon"></i>
-          </div>
-        </div>
-      </div>
-</div>
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            <div class="content">
+                <p id="title_header"></p>
+            </div>
+            <br>
 
-{%endblock%}
+            <form class="ui form" method="post" enctype="multipart/form-data" id="upload_form"
+                action="{% url 'jobs_search:apply'%}">
+
+                {% csrf_token %}
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="cv_pdf" accept="application/pdf">
+                    <input type="hidden" name="annonce_hidden_pk" id="annonce_hidden_pk"  />
+                    <br>
+                    <button type="submit" class="ui right floated green button">Upload</button>
+                </form>
+
+            </form>
+        </div>
+
+    </div>
+
+    {%endblock%}

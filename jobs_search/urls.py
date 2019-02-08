@@ -31,4 +31,7 @@ urlpatterns = [
     # #/search_results/
     url(r'^search_results', views.search, name='search'),
 
+    # #/apply/
+    url(r'^apply', views.apply, name='apply'),
+
 ]
