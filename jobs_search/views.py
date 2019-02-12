@@ -16,15 +16,22 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
-class AnnoncesListView(generic.ListView):
+class AnnoncesListView(View):
 
     template_name = "jobs_search/index.html"
-    context_object_name = "all_annonces"
-    paginate_by = 6
-
-    def get_queryset(self):
-        return Annonce.objects.order_by('-date')
-
+    def get(self, request):
+        all_annonces = Annonce.objects.all()
+        u_s_r = request.user
+        if u_s_r.is_anonymous():
+            profile_status="unknown"
+        else:
+            profile = Profile.objects.get(user=u_s_r)
+            profile_status = profile.status
+        context = {
+            "all_annonces":all_annonces,
+            "profile_status":profile_status
+        }
+        return render(request, self.template_name, context)
 
 class AnnonceDetailView (generic.DetailView):
 

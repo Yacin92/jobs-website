@@ -28,7 +28,7 @@
           <a class="item" href="{% url 'jobs_search:index'%}" style='color:#21BA45'>
             <strong>JOBS</strong>
           </a>
-          {% if request.user.is_authenticated%}
+          {% if request.user.is_authenticated and profile_status == "employer"%}
           <a class="item" href="{% url 'jobs_search:create'%}">
             Add New
           </a>
