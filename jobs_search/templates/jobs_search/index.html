@@ -70,10 +70,17 @@
                             <div class="extra">
                                 {{annonce.region}}
                             </div>
+                            {%if profile_status == "employee"%}
                             <div>
                                 <button class="ui green right floated button"
                                     onclick="apply('{{annonce.title}}', '{{annonce.pk}}')">Apply</button>
                             </div>
+                            {%endif%}
+                            {%if profile_status == "unknown"%}
+                            <div>
+                                <a href="{% url 'jobs_search:login'%}"><button class="ui green right floated button">Apply</button></a>
+                            </div>
+                            {%endif%}
                         </div>
                     </div>
                 </div>
