@@ -129,8 +129,11 @@ def user_annonces_list(request):
     user = request.user
     profile = Profile.objects.get(user=user)
     list_annonces = profile.annonce_set.all()
+    list_requests = Request.objects.filter(employee=profile)
     context = {
-        'list_annonces': list_annonces
+        'list_annonces': list_annonces,
+        'profile':profile,
+        'list_requests':list_requests
     }
     return render(request, 'jobs_search/annonces_list.html', context)
 
