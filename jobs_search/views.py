@@ -1,20 +1,22 @@
 from django.views import generic
 from django.views.generic.edit import CreateView
-from .models import Annonce
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
-from .models import Profile, Request
-from .forms import ProfileForm
-from .forms import UserLoginForm
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.contrib import messages
+
+from .models import Profile, Request
+from .forms import UserLoginForm
+from .models import Annonce
+from .forms import ProfileForm
 
 class AnnoncesListView(View):
 
@@ -79,7 +81,11 @@ class ProfileFormView(View):
             username = form.cleaned_data['username']
             status = form.cleaned_data['status']
 
-            u_s_r = User.objects.create(email=email, username=username)
+            try:
+                u_s_r = User.objects.create(email=email, username=username)
+            except:
+                messages.warning(request, 'verify your informations')
+                return redirect("jobs_search:register")
             u_s_r.set_password(password)
             u_s_r.save()
             profile = Profile.objects.create(user=u_s_r, status=status)
