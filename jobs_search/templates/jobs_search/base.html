@@ -63,6 +63,15 @@
         </div>
         </div>
         <br><br><br>
+        <div class="ui center aligned container" style="margin-top: 30px">
+            {% if messages %}
+            {% for message in messages %}
+                    <div class="ui {{ message.tags }} message">
+                    <p>{{message}}</p>
+                    </div>
+            {% endfor %}
+            {% endif %}
+        </div>
 
     {%block body%}
     {%endblock%}
