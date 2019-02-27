@@ -2,6 +2,8 @@ version: '2'
 
 services:
   django-jobs:
+    env_file:
+      - secrets.env
     build: .
     # command: bash -c "python manage.py makemigrations && python manage.py migrate"
     container_name: jobs-info

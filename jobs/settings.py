@@ -123,7 +123,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-SECRET_KEY='gzq&$aiw7)=a(&8ss8mvmwes4u23bqkeda-r#e#^fl0b_v*#zw'
+SECRET_KEY=os.environ["SECRET_KEY"]
 DEBUG=True
 
 # Activate Django-Heroku.
