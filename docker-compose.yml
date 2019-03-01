@@ -2,6 +2,7 @@ version: '2'
 
 services:
   django-jobs:
+    image: yacincheffai/jobs-info
     env_file:
       - secrets.env
     build: .
