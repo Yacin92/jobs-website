@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # DEBUG = config('DEBUG', default=False, cast=bool)
 
 
-ALLOWED_HOSTS = ['jobs-tn.herokuapp.com', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['jobs-tn.herokuapp.com', '127.0.0.1', '0.0.0.0', '128.199.171.34']
 
 
 # Application definition
