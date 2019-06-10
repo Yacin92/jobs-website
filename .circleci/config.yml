@@ -9,7 +9,15 @@ jobs:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: yacincheffai/jobs-info
-      - image: postgres
+        environment:
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+
+      # Service container image available at `host: localhost`
+      - image: circleci/postgres:9.6.2-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
